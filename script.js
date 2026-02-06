@@ -3,15 +3,13 @@
 // ======================================================
 
 // --- API ---
-// ✅ FIX 1: Use the REAL API endpoint (The other one was just a placeholder)
+// ✅ REAL API endpoint 
 const API_BASE = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/";
 
 // --- DOM ---
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 const errorMsg = document.getElementById("error-msg");
-
-// ✅ FIX 2: Removed the duplicate "creatureName" line here
 const creatureName = document.getElementById("creature-name");
 const creatureId = document.getElementById("creature-id");
 const weight = document.getElementById("weight");
