@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPG Creature Search</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1>RPG Creature Search</h1>
+        <p class="subtitle">Search by creature name or ID</p>
+      </header>
+
+      <section class="search-card">
+        <label class="label" for="search-input">Creature name or ID</label>
+
+        <div class="search-row">
+          <!-- REQUIRED -->
+          <input
+            id="search-input"
+            type="text"
+            required
+            placeholder="e.g. Pyrolynx or 2"
+            autocomplete="off"
+          />
+
+          <!-- REQUIRED -->
+          <button id="search-button" type="button">Search</button>
+        </div>
+      </section>
+
+      <section class="result-card">
+        <div class="topline">
+          <!-- REQUIRED -->
+          <h2 id="creature-name">—</h2>
+          <!-- REQUIRED -->
+          <p id="creature-id">—</p>
+        </div>
+
+        <div class="meta">
+          <!-- REQUIRED -->
+          <p id="weight">Weight: —</p>
+          <!-- REQUIRED -->
+          <p id="height">Height: —</p>
+        </div>
+
+        <div class="types-wrap">
+          <h3>Types</h3>
+          <!-- REQUIRED -->
+          <div id="types" class="types"></div>
+        </div>
+
+        <div class="stats">
+          <h3>Stats</h3>
+          <div class="stats-grid">
+            <div class="stat"><span>HP</span> <span id="hp">—</span></div>
+            <div class="stat"><span>Attack</span> <span id="attack">—</span></div>
+            <div class="stat"><span>Defense</span> <span id="defense">—</span></div>
+            <div class="stat"><span>Special Attack</span> <span id="special-attack">—</span></div>
+            <div class="stat"><span>Special Defense</span> <span id="special-defense">—</span></div>
+            <div class="stat"><span>Speed</span> <span id="speed">—</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
+
+
