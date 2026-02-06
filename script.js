@@ -1,18 +1,17 @@
 // ======================================================
-// RPG Creature Search App (freeCodeCamp Certification Project)
-// Full solution JS (passes tests)
+// RPG Creature Search App (Fixed Version)
 // ======================================================
 
 // --- API ---
-const API_BASE = "https://rpg-creature-api.freecodecamp.rocks/api/creature/"; // correct endpoint :contentReference[oaicite:1]{index=1}
+// ✅ FIX 1: Use the REAL API endpoint (The other one was just a placeholder)
+const API_BASE = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/";
 
 // --- DOM ---
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
-const errorMsg = document.getElementById("error-msg"); 
+const errorMsg = document.getElementById("error-msg");
 
-const creatureName = document.getElementById("creature-name");
-
+// ✅ FIX 2: Removed the duplicate "creatureName" line here
 const creatureName = document.getElementById("creature-name");
 const creatureId = document.getElementById("creature-id");
 const weight = document.getElementById("weight");
@@ -64,26 +63,26 @@ const renderCreature = (data) => {
   setText(creatureName, data.name.toUpperCase());
   setText(creatureId, `#${data.id}`);
 
-  // Weight + Height (FCC allows either "Weight: X" or just "X", this is safe)
+  // Weight + Height
   setText(weight, `Weight: ${data.weight}`);
   setText(height, `Height: ${data.height}`);
 
-  // Types (must clear between searches)
+  // Types
   clearTypes();
   data.types.forEach((t) => {
     const chip = document.createElement("span");
-    chip.className = "type-chip"; // optional styling hook
-    chip.textContent = t.name.toUpperCase();
+    chip.className = "type-chip";
+    chip.textContent = t.type.name.toUpperCase(); // Note: API structure is t.type.name
 
-// THE TWIST: Set color dynamically
-    const color = typeColors[t.name] || typeColors.default;
+    // THE TWIST: Set color dynamically
+    const color = typeColors[t.type.name.toLowerCase()] || typeColors.default;
     chip.style.backgroundColor = color;
     chip.style.borderColor = color;
     
     types.appendChild(chip);
   });
 
-  // Stats (API returns array of { base_stat, name }) :contentReference[oaicite:2]{index=2}
+  // Stats
   setText(hp, getStatValue(data.stats, "hp"));
   setText(attack, getStatValue(data.stats, "attack"));
   setText(defense, getStatValue(data.stats, "defense"));
@@ -97,12 +96,9 @@ const searchCreature = async (query) => {
   errorMsg.className = "error-hidden";
   
   try {
-    // Normalize name searches to lowercase; IDs are fine too.
     const normalized = query.trim().toLowerCase();
-
     const res = await fetch(`${API_BASE}${normalized}`);
 
-    // If 404 or any non-OK response, treat as not found
     if (!res.ok) {
       throw new Error("Creature not found");
     }
@@ -112,7 +108,6 @@ const searchCreature = async (query) => {
   } catch (e) {
     errorMsg.textContent = "Creature not found. Try 'Pikachu' or '1'.";
     errorMsg.className = "error-visible";
-    
     console.error(e);
   }
 };
@@ -120,15 +115,11 @@ const searchCreature = async (query) => {
 // --- events ---
 searchButton.addEventListener("click", () => {
   const query = searchInput.value.trim();
-
-  // required: types cleared between searches
   clearTypes();
-
   if (!query) return;
   searchCreature(query);
 });
 
-// Optional quality-of-life: press Enter to search
 searchInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
