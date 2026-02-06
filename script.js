@@ -23,6 +23,25 @@ const specialAttack = document.getElementById("special-attack");
 const specialDefense = document.getElementById("special-defense");
 const speed = document.getElementById("speed");
 
+const typeColors = {
+  normal: '#A8A77A',
+  fire: '#EE8130',
+  water: '#6390F0',
+  electric: '#F7D02C',
+  grass: '#7AC74C',
+  ice: '#96D9D6',
+  fighting: '#C22E28',
+  poison: '#A33EA1',
+  ground: '#E2BF65',
+  flying: '#A98FF3',
+  psychic: '#F95587',
+  bug: '#A6B91A',
+  rock: '#B6A136',
+  ghost: '#735797',
+  dragon: '#6F35FC',
+  default: '#A040A0'
+};
+
 // --- helpers ---
 const clearTypes = () => {
   types.innerHTML = "";
@@ -52,6 +71,12 @@ const renderCreature = (data) => {
     const chip = document.createElement("span");
     chip.className = "type-chip"; // optional styling hook
     chip.textContent = t.name.toUpperCase();
+
+// THE TWIST: Set color dynamically
+    const color = typeColors[t.name] || typeColors.default;
+    chip.style.backgroundColor = color;
+    chip.style.borderColor = color;
+    
     types.appendChild(chip);
   });
 
