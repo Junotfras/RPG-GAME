@@ -72,6 +72,13 @@ body {
   grid-template-columns: 1fr auto;
   gap: 10px;
 }
+.error-hidden { display: none; }
+.error-visible {
+  display: block;
+  color: #ff6b6b; /* Red warning color */
+  font-weight: bold;
+  margin-top: 10px;
+}
 
 #search-input {
   height: 44px;
